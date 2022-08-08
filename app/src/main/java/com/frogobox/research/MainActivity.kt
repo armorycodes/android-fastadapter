@@ -2,10 +2,12 @@ package com.frogobox.research
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.frogobox.research.databinding.ActivityMainBinding
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,20 +57,15 @@ class MainActivity : AppCompatActivity() {
         val fastAdapter = FastAdapter.with(itemAdapter)
 
         //fill with some sample data
-        var x = 0
         val items = ArrayList<SimpleItem>()
-        for (s in ALPHABET) {
-            val count = Random().nextInt(20)
-            for (i in 1..count) {
-                val item = SimpleItem().withName("$s Test $x")
-                item.identifier = (100 + x).toLong()
-                items.add(item)
-                x++
-            }
+        for ((x, s) in ALPHABET.withIndex()) {
+            val item = SimpleItem().withName("$s Test $x").withDescription("")
+            items.add(item)
         }
         itemAdapter.add(items)
 
         //set our adapters to the RecyclerView
+        binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.adapter = fastAdapter
 
     }

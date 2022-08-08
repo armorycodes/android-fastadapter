@@ -8,7 +8,6 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.drag.IDraggable
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter.ui.utils.FastAdapterUIUtils
-import com.mikepenz.fastadapter.ui.utils.StringHolder
 
 // Created by (M. Faisal Amir) on 08/08/22.
 
@@ -16,8 +15,8 @@ import com.mikepenz.fastadapter.ui.utils.StringHolder
 open class SimpleItem : AbstractItem<SimpleItem.ViewHolder>(), IDraggable {
 
     var header: String? = null
-    var name: StringHolder? = null
-    var description: StringHolder? = null
+    var GlobalName: String? = null
+    var GlobalDescription: String? = null
 
     override var isDraggable = true
 
@@ -43,22 +42,22 @@ open class SimpleItem : AbstractItem<SimpleItem.ViewHolder>(), IDraggable {
     }
 
     fun withName(Name: String): SimpleItem {
-        this.name = StringHolder(Name)
+        this.GlobalName = Name
         return this
     }
 
     fun withName(@StringRes NameRes: Int): SimpleItem {
-        this.name = StringHolder(NameRes)
+        this.GlobalName = NameRes.toString()
         return this
     }
 
     fun withDescription(description: String): SimpleItem {
-        this.description = StringHolder(description)
+        this.GlobalDescription = description
         return this
     }
 
     fun withDescription(@StringRes descriptionRes: Int): SimpleItem {
-        this.description = StringHolder(descriptionRes)
+        this.GlobalDescription = descriptionRes.toString()
         return this
     }
 
@@ -90,9 +89,9 @@ open class SimpleItem : AbstractItem<SimpleItem.ViewHolder>(), IDraggable {
             //set the background for the item
             view.background = FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true)
             //set the text for the name
-            StringHolder.applyTo(item.name, name)
+            name.text = item.GlobalName
+            description.text = item.GlobalDescription
             //set the text for the description or hide
-            StringHolder.applyToOrHide(item.description, description)
         }
 
         override fun unbindView(item: SimpleItem) {

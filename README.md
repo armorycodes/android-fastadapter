@@ -2,7 +2,7 @@
 - Template repository for doing research on Android Technologies
 
 ## Screenshoot
-- ![](docs/image/ss_apps.png?raw=true)
+<img width="200px" height="360px" src="docs/image/ss_apps.png">
 
 ## Docs
 - https://github.com/mikepenz/FastAdapter
